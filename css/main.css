@@ -2,6 +2,12 @@ nav ul a {
     color: #444;
 }
 
+.url_card {
+    background: white;
+    padding: 5px;
+    border: 1px solid #cbcbcb;
+    margin: 5px 0;
+}
 nav .brand-logo {
 	top: 7px;
 }
