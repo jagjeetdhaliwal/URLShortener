@@ -18,9 +18,7 @@ class ShortUrl {
 		} elseif (is_string($idOrUrl)) {
 			$this->url = $idOrUrl;
 		}
-
 		//fetch url details from data store and populate the url object
-
 	}
 }
 
