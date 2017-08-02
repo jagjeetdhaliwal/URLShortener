@@ -2,9 +2,11 @@ AddDefaultCharset UTF-8
 AddCharset UTF-8 .js
 DirectoryIndex index.php
 
-RewriteEngine on
-RewriteRule ^/r/(.*)$ index.php?goto=$1 [L,QSA]
 
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteRule ^([0-9a-zA-Z]+)$ index.php?goto=$1 [L,QSA]
+</IfModule>
 
 Redirect 404 "/includes"
 
