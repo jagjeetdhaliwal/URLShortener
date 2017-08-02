@@ -41,9 +41,7 @@
 									<div id="url_error" class="error-label">Paste a URL to shorten it</div>
 								</div>
 							</div>
-						    <button class="btn waves-effect waves-light" id="url_form_submit" type="submit" name="action">Submit
-								<i class="material-icons right">Shorten</i>
-							</button>
+						    <button class="btn waves-effect waves-light" id="url_form_submit" type="submit" name="action">Shorten</button>
 						</form>
 
 						<div class="form-message"></div>
@@ -52,11 +50,6 @@
 			</div>
 		</div>
     </section>
-
-    <footer class="page-footer teal">
-	    <div class="container">
-	    </div>
-	</footer>
 
     <!--Import jQuery before materialize.js-->
 	<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>

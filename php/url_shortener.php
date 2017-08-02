@@ -10,7 +10,7 @@ $destination_url = isset($_POST['url'])
 
 $output = array();
 
-if (!$destination_url) {
+if (!$destination_url || !filter_var($destination_url, FILTER_VALIDATE_URL)) {
 	//return error json
 
 	$output['status'] = 'failed';
