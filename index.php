@@ -2,6 +2,11 @@
 	// if (!empty($_SESSION['userdetails'])) {
 	// 	$data = $_SESSION['userdetails'];
 	// }
+
+	if (isset($_GET['goto']) && $_GET['goto']) {
+		header("Location: http://example.com/myOtherPage.php");
+		die();
+	}
 ?>
 <!DOCTYPE HTML>
 <html>
