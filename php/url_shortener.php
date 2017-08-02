@@ -21,9 +21,14 @@ if (!$destination_url) {
 	$short_url = \UrlManager::createShortUrl($destination_url);
 
 	if ($short_url) {
-		$output['status'] = 'success';
-		$output['short_url'] = $short_url;
-		$output['message'] = 'Url shortened successfully';
+		if (\UrlManager::saveShortURL($short_url, $destination_url)) {
+			$output['status'] = 'success';
+			$output['short_url'] = $short_url;
+			$output['message'] = 'Url shortened successfully';
+		} else {
+			$output['status'] = 'failed';
+			$output['message'] = 'Sorry, we let you down. Please try again later';
+		}
 	} else {
 		$output['status'] = 'failed';
 		$output['message'] = 'Sorry, we let you down. Please try again later';
