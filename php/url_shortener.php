@@ -34,6 +34,7 @@ if (!$destination_url || !filter_var($destination_url, FILTER_VALIDATE_URL)) {
 	}
 }
 
+header("Content-Type: application/json");
 echo json_encode($output);
 die();
 
