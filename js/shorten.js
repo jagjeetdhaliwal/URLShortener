@@ -65,7 +65,7 @@ $(document).ready(function(){
 
 
 function addNewURL(short_url, destination_url) {
-	var html = '<a target="_blank" href="'+destination_url+'">'+short_url+'</a><div>'+destination_url+'</div>';
+	var html = '<div class="url_card"><a class="from_url" target="_blank" href="'+destination_url+'">'+short_url+'</a><div class="to_url">'+destination_url+'</div></div>';
 	$('#recent').prepend(html);
 }
 

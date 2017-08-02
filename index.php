@@ -53,8 +53,8 @@ require_once(__DIR__ . '/modules/UrlManager.php');
 							<div class="row">
 								<div class="input-field col s12">
 									<input id="url" name="url" type="text" class="validate">
-									<label for="url">URL</label>
-									<div id="url_error" class="error-label">Paste a URL to shorten it</div>
+									<label for="url">Paste a URL to shorten it</label>
+									<div id="url_error" class="error-label">Please enter a valid URL</div>
 								</div>
 							</div>
 						    <button class="btn waves-effect waves-light" id="url_form_submit" type="submit" name="action">Shorten</button>
@@ -70,9 +70,10 @@ require_once(__DIR__ . '/modules/UrlManager.php');
 		<div class="container">
 			<h4>History</h4>
 			<?php foreach ($historic_urls as $url) { ?>
-				<div>
-					<a target="_blank" href="<?php echo $url['destination_url']; ?>" ><?php echo $url['short_url']; ?></a>
-					<div><?php echo $url['destination_url']; ?> </div>
+				<div class="url_card">
+					<a class="from_url" target="_blank" href="<?php echo $url['destination_url']; ?>" ><?php echo $url['short_url']; ?></a>
+					<div class="to_url"><?php echo $url['destination_url']; ?> </div>
+				</div>
 			<?php } ?>
 		</div>
     </section>
