@@ -30,6 +30,8 @@ We are assuming that our application is dominated by the read operations (90% re
     as well.
    
  4. CSRF token validation has been implemented to avoid CSRF attacks.
+ 
+ 5. Used Materialize to come up with a quick interface.
     
 ##Demo available at 
 
