@@ -47,9 +47,9 @@ http://13.59.76.31/
  
  3. Manage sessions better and store them to redis/database.
  
- 4. Debug redirection at Htaccess level. For some reason, the redirection to longer urls from url like http://xx.x.x.x/ksahd
+ 4. ~~Debug redirection at Htaccess level. For some reason, the redirection to longer urls from url like http://xx.x.x.x/ksahd
  isn't working on EC2. Spent a good 45 minutes to figure it out but in the end took the leeway to use http://xx.x.x.x/index.php?goto=''
- format for now...
+ format for now...~~ Fixed this. Was a problem with the mod rewrite configuration on my ec2 instance. Check commit https://github.com/jagjeetdhaliwal/URLShortener/commit/54ad40a6e69543c28f7525f75a6f00136824c779
 
  5. Add a list of stop words for unacceptable words in urls :-)
 
