@@ -1,8 +1,9 @@
 <?php
 
 define('SITE_ENVIRONMENT', "development", false);
-define('REDIS_INSTANCE_PORT', 6379, false);
 
+define('REDIS_URL_PORT', 6379, false);
+define('REDIS_URL_HOST', '127.0.0.1', false);
 
 $_settings = array();
 

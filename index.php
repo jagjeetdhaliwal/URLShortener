@@ -7,9 +7,18 @@ require_once(__DIR__ . '/modules/ShortUrl.php');
 require_once(__DIR__ . '/modules/UrlManager.php');
 	if (isset($_GET['goto']) && $_GET['goto']) {
 
-		$URL = new ShortUrl(trim($_GET['goto']));
+		$redis = new Redis();
+		$redis->connect(REDIS_URL_HOST, REDIS_URL_PORT);
+		$destination_url = $redis->get(trim($_GET['goto']));
 
-		if ($URL->id) {
+		if (!$destination_url) {
+			$URL = new ShortUrl(trim($_GET['goto']));
+			if ($URL->id) {
+				$destination_url = $URL->destination_url;
+			}
+		}
+
+		if ($destination_url) {
 			header("Location: ".$URL->destination_url);
 			die();
 		}
