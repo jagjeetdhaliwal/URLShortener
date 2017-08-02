@@ -8,8 +8,10 @@
 
 		$URL = new ShortUrl(trim($_GET['goto']));
 
-		header("Location: ".$URL->destination_url);
-		die();
+		if ($URL->id) {
+			header("Location: ".$URL->destination_url);
+			die();
+		}
 	}
 ?>
 <!DOCTYPE HTML>
