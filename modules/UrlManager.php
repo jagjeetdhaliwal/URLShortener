@@ -66,14 +66,14 @@ class UrlManager extends ShortUrl {
 	}
 
 	public static function getLastFiveURLs() {
-		$urls = array();
+	global $DB;	
+	$urls = array();
 
 		$query = "SELECT `id`, `short_url`, `destination_url`
 				FROM `url_mappings`
 				ORDER BY `created_at` DESC
 				LIMIT 5";
 		$stmt = $DB->prepare($query);
-    	$stmt->bind_param('i', $idOrUrl);
     	$stmt->bind_result($id, $url, $destination_url);
 	    $stmt->execute();
 

@@ -3,8 +3,9 @@
 	// 	$data = $_SESSION['userdetails'];
 	// }
 
+require_once(__DIR__ . '/modules/ShortUrl.php');
+require_once(__DIR__ . '/modules/UrlManager.php');
 	if (isset($_GET['goto']) && $_GET['goto']) {
-		require_once(__DIR__ . '/modules/ShortUrl.php');
 
 		$URL = new ShortUrl(trim($_GET['goto']));
 
@@ -13,6 +14,10 @@
 			die();
 		}
 	}
+
+
+	$historic_urls = \UrlManager::getLastFiveURLs();
+
 ?>
 <!DOCTYPE HTML>
 <html>
@@ -59,6 +64,16 @@
 					</div>
 				</div>
 			</div>
+		</div>
+	<div id="recent" class="container">
+	</div>
+		<div class="container">
+			<h4>History</h4>
+			<?php foreach ($historic_urls as $url) { ?>
+				<div>
+					<a target="_blank" href="<?php echo $url['destination_url']; ?>" ><?php echo $url['short_url']; ?></a>
+					<div><?php echo $url['destination_url']; ?> </div>
+			<?php } ?>
 		</div>
     </section>
 

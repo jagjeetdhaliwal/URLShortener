@@ -50,12 +50,12 @@ $(document).ready(function(){
     	        })
     	        .done(function(data) {
     	            if (data !=null && data.hasOwnProperty('status') && data.status === 'success') {
-    	            	  form.hide();
                       addNewURL(data.short_url, url);
     	            } else {
-          	    		 	form_button.html('Shorten');
           	    		 	$('.form-message').text('Something went wrong, go back and try again!').show().addClass('red');
     	            }
+
+          	    		 	form_button.html('Shorten');
              });
   		}
 
@@ -65,8 +65,10 @@ $(document).ready(function(){
 
 
 function addNewURL(short_url, destination_url) {
-    return true;
+	var html = '<a target="_blank" href="'+destination_url+'">'+short_url+'</a><div>'+destination_url+'</div>';
+	$('#recent').prepend(html);
 }
+
 
 //function to validate urls at the front end. Ideally would use a library like https://www.npmjs.com/package/valid-url
 function isURL(str) {
