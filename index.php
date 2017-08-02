@@ -4,7 +4,10 @@
 	// }
 
 	if (isset($_GET['goto']) && $_GET['goto']) {
-		header("Location: http://example.com/myOtherPage.php");
+
+		$URL = new ShortUrl(trim($_GET['goto']));
+
+		header("Location: ".$URL->destination_url);
 		die();
 	}
 ?>
