@@ -81,7 +81,7 @@
 			<h4>History</h4>
 			<?php foreach ($historic_urls as $url) { ?>
 				<div class="url_card">
-					<a class="from_url" target="_blank" href="<?php echo $url['destination_url']; ?>" ><?php echo $url['short_url']; ?></a>
+					<a class="from_url" target="_blank" href="<?php echo HOST.$url['short_url']; ?>" ><?php echo $url['short_url']; ?></a>
 					<div class="to_url"><?php echo $url['destination_url']; ?> </div>
 				</div>
 			<?php } ?>
