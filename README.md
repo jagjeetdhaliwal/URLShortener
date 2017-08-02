@@ -49,5 +49,5 @@ http://13.59.76.31/
  isn't working on EC2. Spent a good 45 minutes to figure it out but in the end took the leeway to use http://xx.x.x.x/index.php?goto=''
  format for now...
 
-
+ 5. Add a list of stop words for unacceptable words in urls :-)
 
