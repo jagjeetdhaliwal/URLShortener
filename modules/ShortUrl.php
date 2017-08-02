@@ -30,6 +30,7 @@ class ShortUrl {
 			$query = "SELECT `id`, `short_url`, `destination_url`
 				FROM `url_mappings`
 				WHERE `short_url` = ?";
+			$stmt = $DB->prepare($query);
 		    $stmt->bind_param('s', $idOrUrl);
 		}		
 	

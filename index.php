@@ -4,6 +4,7 @@
 	// }
 
 	if (isset($_GET['goto']) && $_GET['goto']) {
+		require_once(__DIR__ . '/modules/ShortUrl.php');
 
 		$URL = new ShortUrl(trim($_GET['goto']));
 
