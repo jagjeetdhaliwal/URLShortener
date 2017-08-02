@@ -9,7 +9,6 @@ $destination_url = isset($_POST['url'])
 	? trim(filter_var(trim($_POST['url']), FILTER_SANITIZE_URL)) : '';
 
 $output = array();
-$destination_url = 'https://www.very-long-domain-for-bored-people.com/articles/category/tutorials/2014/05/12/how-to-desing-url-shortener-and-build-it-in-2-hours#summary';
 
 if (!$destination_url) {
 	//return error json
