@@ -21,15 +21,41 @@ class UrlManager extends ShortUrl {
 
 	public static function urlAlreadyExists($short_url) {
 		// Check in database
+		global $DB;
 
-		return false;
+	    $query = "SELECT COUNT(*)
+				FROM `url_mappings`
+				WHERE `short_url` = ?";
+
+	    $stmt = $DB->prepare($query);
+	    $stmt->bind_param('s', $short_url);
+		$stmt->bind_result($exists);
+	    $stmt->execute();
+	    $stmt->fetch();
+	    $stmt->close();
+
+	    return $exists;
 	}
 
 
 	public static function saveShortURL($short_url, $destination_url) {
 		//Store in database and then in redis
+		global $DB;
 
-		return true;
+	    $query = "INSERT INTO `url_mappings`(`short_url`, `destination_url`) VALUES (?, ?)";
+
+	    $stmt = $DB->prepare($query);
+	    $stmt->bind_param('ss', $short_url, $destination_url);
+	    $stmt->execute();
+
+	    $affected = false;
+	    if ($stmt->affected_rows) {
+	        $affected = true;
+	    }
+
+	    $stmt->close();
+
+	    return $affected;
 	}
 
 
