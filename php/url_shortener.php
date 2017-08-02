@@ -17,20 +17,19 @@ if (!isSet($_SESSION['csrf_token']) || empty($_SESSION['csrf_token'])
 
 	$output = array();
 
+	// validate destination url that we are shortening.
 	if (!$destination_url || !filter_var($destination_url, FILTER_VALIDATE_URL)) {
-		//return error json
-
 		$output['status'] = 'failed';
 		$output['message'] = 'Please pass a valid URL';
-
 	} else {
-		$short_url = \UrlManager::createShortUrl($destination_url);
+		$short_url = \UrlManager::createShortUrl($destination_url); //generate a short url.
 
+		//TO DO - use a semaphore on short_url to avoid further collisions at scale. Redis can be used.
 		if ($short_url) {
-			if (\UrlManager::saveShortURL($short_url, $destination_url)) {
+			if (\UrlManager::saveShortURL($short_url, $destination_url)) { //save url in the database
 				$redis = new Redis();
 				$redis->connect(REDIS_URL_HOST, REDIS_URL_PORT);
-				$redis->set($short_url, $destination_url);
+				$redis->set($short_url, $destination_url); //save in redis for faster fetching.
 
 				$output['status'] = 'success';
 				$output['short_url'] = $short_url;

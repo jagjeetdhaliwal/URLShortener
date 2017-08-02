@@ -7,11 +7,12 @@
 	require_once(__DIR__ . '/modules/UrlManager.php');
 	
 	if (isset($_GET['goto']) && $_GET['goto']) {
-
+		// Check in redis if the short url exists for faster read.
 		$redis = new Redis();
 		$redis->connect(REDIS_URL_HOST, REDIS_URL_PORT);
 		$destination_url = $redis->get(trim($_GET['goto']));
 		
+		// if we can't find in redis, check it in the database.
 		if (!$destination_url) {
 			$URL = new ShortUrl(trim($_GET['goto']));
 			if ($URL->id) {
@@ -19,13 +20,15 @@
 			}
 		}
 
+		// if the url doesn't exist, we do a soft failure by loading our home screen.
+		// if it exists, then we redirect to the corresponding destination url
 		if ($destination_url) {
 			header("Location: ".$destination_url);
 			die();
 		}
 	}
 
-
+	//Fetch historically generated urls
 	$historic_urls = \UrlManager::getLastFiveURLs();
 
 ?>

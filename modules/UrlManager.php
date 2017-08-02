@@ -3,6 +3,7 @@
 class UrlManager extends ShortUrl {
 	const SHORT_URL_LENGTH = 6;
 
+	// Creates a random short string that we can use as a short url.
 	public static function createShortUrl() {
 		$characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
 		$num_characters = strlen($characters);
@@ -20,7 +21,9 @@ class UrlManager extends ShortUrl {
 	}
 
 	public static function urlAlreadyExists($short_url) {
-		// Check in database
+		// Check in database. We consider database as the ultimate truth and redis just as a caching layer.
+		// We can also check first in redis and then in the database. But given our lower number of writes compared
+		// to reads this shouldn't be a problem.
 		global $DB;
 
 	    $query = "SELECT COUNT(*)
@@ -39,7 +42,7 @@ class UrlManager extends ShortUrl {
 
 
 	public static function saveShortURL($short_url, $destination_url) {
-		//Store in database and then in redis
+		//Store in database. Redis storage is handled in the handler.
 		global $DB;
 
 	    $query = "INSERT INTO `url_mappings`(`short_url`, `destination_url`) VALUES (?, ?)";
@@ -59,30 +62,31 @@ class UrlManager extends ShortUrl {
 	}
 
 
-	// Check the urls done only in the last 15 minutes. We allow duplicacy in destination urls
+	// TO DO: Check the urls done only in the last 15 minutes. We allow duplicacy in destination urls
 	public static function hasUrlAlreadyBeenShortened($destination_url) {
 
 		return false;
 	}
 
+	// get last five urls generated across the application. TO DO: move to redis.
 	public static function getLastFiveURLs() {
-	global $DB;	
-	$urls = array();
+		global $DB;	
+		$urls = array();
 
 		$query = "SELECT `id`, `short_url`, `destination_url`
 				FROM `url_mappings`
 				ORDER BY `created_at` DESC
 				LIMIT 5";
 		$stmt = $DB->prepare($query);
-    	$stmt->bind_result($id, $url, $destination_url);
-	    $stmt->execute();
+		$stmt->bind_result($id, $url, $destination_url);
+		$stmt->execute();
 
-	    while ($stmt->fetch()) {
-	    	$urls[] = array('short_url' => $url, 'destination_url' => $destination_url);
-	    }
+		while ($stmt->fetch()) {
+			$urls[] = array('short_url' => $url, 'destination_url' => $destination_url);
+		}
 
-	    $stmt->close();
+		$stmt->close();
 
-	    return $urls;
+		return $urls;
 	}
 }
