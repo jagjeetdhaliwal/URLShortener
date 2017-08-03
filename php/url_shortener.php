@@ -7,10 +7,10 @@ require_once(__DIR__ . '/../modules/UrlManager.php');
 
 // Validate CSRF token
 if (!isSet($_SESSION['csrf_token']) || empty($_SESSION['csrf_token'])
-    || empty($_POST['csrf_token']) || !isSet($_POST['csrf_token'])
-    || ($_SESSION['csrf_token'] != $_POST['csrf_token']) ) {
+	|| empty($_POST['csrf_token']) || !isSet($_POST['csrf_token'])
+	|| ($_SESSION['csrf_token'] != $_POST['csrf_token']) ) {
 	$output['status'] = 'failed';
-    $output['message'] = "Something went wrong, go back and try again!";
+	$output['message'] = "Something went wrong, go back and try again!";
 } else {
 	$destination_url = isset($_POST['url'])
 		? trim(filter_var(trim($_POST['url']), FILTER_SANITIZE_URL)) : '';
@@ -48,9 +48,3 @@ if (!isSet($_SESSION['csrf_token']) || empty($_SESSION['csrf_token'])
 header("Content-Type: application/json");
 echo json_encode($output);
 die();
-
-
-
-
-
-

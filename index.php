@@ -53,9 +53,9 @@
 	<header class="body">
 		<nav class="white" role="navigation">
 		</nav>
-    </header>
+	</header>
 
-    <section class="body">
+	<section class="body">
 		<div class="container" id="shorten">
 			<div class="section">
 				<div class="row">
@@ -89,9 +89,9 @@
 				</div>
 			<?php } ?>
 		</div>
-    </section>
+	</section>
 
-    <!--Import jQuery before materialize.js-->
+	<!--Import jQuery before materialize.js-->
 	<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 	<script type="text/javascript" src="js/materialize.min.js"></script>
 	<script type="text/javascript" src="js/shorten.js"></script>

@@ -26,18 +26,18 @@ class UrlManager extends ShortUrl {
 		// to reads this shouldn't be a problem.
 		global $DB;
 
-	    $query = "SELECT COUNT(*)
+		$query = "SELECT COUNT(*)
 				FROM `url_mappings`
 				WHERE `short_url` = ?";
 
-	    $stmt = $DB->prepare($query);
-	    $stmt->bind_param('s', $short_url);
+		$stmt = $DB->prepare($query);
+		$stmt->bind_param('s', $short_url);
 		$stmt->bind_result($exists);
-	    $stmt->execute();
-	    $stmt->fetch();
-	    $stmt->close();
+		$stmt->execute();
+		$stmt->fetch();
+		$stmt->close();
 
-	    return $exists;
+		return $exists;
 	}
 
 
@@ -45,20 +45,20 @@ class UrlManager extends ShortUrl {
 		//Store in database. Redis storage is handled in the handler.
 		global $DB;
 
-	    $query = "INSERT INTO `url_mappings`(`short_url`, `destination_url`) VALUES (?, ?)";
+		$query = "INSERT INTO `url_mappings`(`short_url`, `destination_url`) VALUES (?, ?)";
 
-	    $stmt = $DB->prepare($query);
-	    $stmt->bind_param('ss', $short_url, $destination_url);
-	    $stmt->execute();
+		$stmt = $DB->prepare($query);
+		$stmt->bind_param('ss', $short_url, $destination_url);
+		$stmt->execute();
 
-	    $affected = false;
-	    if ($stmt->affected_rows) {
-	        $affected = true;
-	    }
+		$affected = false;
+		if ($stmt->affected_rows) {
+			$affected = true;
+		}
 
-	    $stmt->close();
+		$stmt->close();
 
-	    return $affected;
+		return $affected;
 	}
 
 
